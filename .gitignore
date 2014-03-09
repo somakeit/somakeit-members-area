@@ -1,0 +1,5 @@
+*.sqlite
+config/
+log/
+node_modules/
+sessions/

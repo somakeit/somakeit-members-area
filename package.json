@@ -1,0 +1,19 @@
+{
+  "name": "Members",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/coffee index.coffee"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sqlite3": "~2.2.0",
+    "coffee-script": ">1.6",
+    "members-area": "~0.1.9",
+    "members-area-passport": "~0.1.0",
+    "members-area-theme-somakeit": "~0.1.0"
+  }
+}
