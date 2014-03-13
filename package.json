@@ -13,7 +13,7 @@
     "sqlite3": "~2.2.0",
     "coffee-script": ">1.6",
     "members-area": "~0.1.9",
-    "members-area-passport": "~0.1.0",
+    "members-area-passport": "~0.1.1",
     "members-area-theme-somakeit": "~0.1.0"
   }
 }
