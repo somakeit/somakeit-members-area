@@ -19,6 +19,7 @@
     "members-area-register-of-members": "~0.1.0",
     "members-area-remote-auth": "^0.1.0",
     "members-area-payments": "^0.1.0",
+    "members-area-gocardless": "*",
     "members-area-banking": "^0.1.0"
   }
 }
