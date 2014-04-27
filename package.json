@@ -21,5 +21,8 @@
     "members-area-payments": "^0.1.0",
     "members-area-gocardless": "*",
     "members-area-banking": "^0.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "~1.0.17"
   }
 }
