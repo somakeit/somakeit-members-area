@@ -247,13 +247,21 @@ MembersArea.start ->
         ]
         heal: ['newPayments', (done, results) ->
           # Heh heh heh, sorry Chris
+          # Heh heh heh, sorry everyone who paid by STO/BGC
+          nonBankingPaymentTypes = ['GC', 'CASH', 'PAYPAL']
           models.Payment.find()
             .where(status: ['failed', 'cancelled'], include: true)
+            .where("(status IN ('failed', 'cancelled')) OR (type NOT IN ?)", [nonBankingPaymentTypes])
             .order("-period_from")
             .all (err, payments) ->
+              return done err if err
               uninclude = (payment, next) ->
                 payment.include = false
-                payment.save (err) ->
+                if payment.type in nonBankingPaymentTypes
+                  action = 'save'
+                else
+                  action = 'remove'
+                payment[action] (err) ->
                   return next err if err
                   payment.getUser (err, user) ->
                     return next err if err
@@ -262,7 +270,6 @@ MembersArea.start ->
                     user.paidUntil = paidUntil
                     user.save (err) ->
                       return next err if err
-                      console.log "Decreased #{user.fullname}'s paid until by #{payment.period_count} month(s) because of failed payment on #{payment.when}"
                       midnight = new Date +payment.period_from
                       midnight.setHours(0)
                       midnight.setMinutes(0)
@@ -277,6 +284,10 @@ MembersArea.start ->
                             p.period_from = from
                             p.save done
                           async.eachSeries paymentsToRewrite, rewrite, ->
+                            if payment.type in nonBankingPaymentTypes
+                              console.log "Decreased #{user.fullname}'s paid until by #{payment.period_count} month(s) because of failed payment on #{payment.when}"
+                            else
+                              console.log "Decreased #{user.fullname}'s paid until by #{payment.period_count} month(s) because of removed bank payment"
                             next null, payment
               async.mapSeries payments, uninclude, done
         ]
