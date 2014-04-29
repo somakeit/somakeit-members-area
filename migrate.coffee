@@ -248,7 +248,7 @@ MembersArea.start ->
         heal: ['newPayments', (done, results) ->
           # Heh heh heh, sorry Chris
           # Heh heh heh, sorry everyone who paid by STO/BGC
-          nonBankingPaymentTypes = ['GC', 'CASH', 'PAYPAL']
+          nonBankingPaymentTypes = ['GC', 'CASH', 'PAYPAL', 'OTHER']
           models.Payment.find()
             .where(status: ['failed', 'cancelled'], include: true)
             .where("(status IN ('failed', 'cancelled')) OR (type NOT IN ?)", [nonBankingPaymentTypes])
