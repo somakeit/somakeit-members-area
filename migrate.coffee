@@ -249,11 +249,35 @@ MembersArea.start ->
           # Heh heh heh, sorry Chris
           models.Payment.find()
             .where(status: ['failed', 'cancelled'], include: true)
+            .order("-period_from")
             .all (err, payments) ->
               uninclude = (payment, next) ->
                 payment.include = false
                 payment.save (err) ->
-                  next err, payment
+                  return next err if err
+                  payment.getUser (err, user) ->
+                    return next err if err
+                    paidUntil = new Date +user.paidUntil
+                    paidUntil.setMonth(paidUntil.getMonth()-payment.period_count)
+                    user.paidUntil = paidUntil
+                    user.save (err) ->
+                      return next err if err
+                      console.log "Decreased #{user.fullname}'s paid until by #{payment.period_count} month(s) because of failed payment on #{payment.when}"
+                      midnight = new Date +payment.period_from
+                      midnight.setHours(0)
+                      midnight.setMinutes(0)
+                      midnight.setSeconds(0)
+                      models.Payment.find()
+                        .where("id <> ? AND user_id = ? AND period_from >= ?", [payment.id, user.id, midnight])
+                        .order("period_from")
+                        .all (err, paymentsToRewrite) ->
+                          rewrite = (p, done) ->
+                            from = new Date +p.period_from
+                            from.setMonth(from.getMonth() - payment.period_count)
+                            p.period_from = from
+                            p.save done
+                          async.eachSeries paymentsToRewrite, rewrite, ->
+                            next null, payment
               async.mapSeries payments, uninclude, done
         ]
 
