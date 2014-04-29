@@ -211,6 +211,48 @@ MembersArea.start ->
         newUsers: ['oldUsers', 'roles', (done, {oldUsers}) ->
           async.mapSeries oldUsers, addUser, done
         ]
+        oldPayments: (done) ->
+          q "SELECT * FROM Payments ORDER BY id;", done
+        newPayments: ['newUsers', 'oldPayments', (done, results) ->
+          newPayments = []
+          for payment in results.oldPayments
+            try
+              payment.data = JSON.parse payment.data
+            catch
+              payment.data = {}
+            made = new Date Date.parse payment.made
+            from = new Date Date.parse payment.subscriptionFrom
+            end = new Date Date.parse payment.subscriptionUntil
+            meta =
+              legacy: payment.data
+            if payment.type is 'GC'
+              meta.gocardlessBillId = payment.data.original.data.gocardlessBill.id
+            newPayment =
+              user_id: payment.UserId
+              transaction_id: null
+              type: payment.type
+              amount: payment.amount
+              status: payment.data.status ? "paid"
+              include: true
+              when: made
+              period_from: from
+              period_count: Math.round(((+end - +from)/(24*60*60*1000)) / 30) # Rough number of months
+              meta: meta
+            newPayments.push newPayment
+          models.Payment.create newPayments, done
+        ]
+        heal: ['newPayments', (done, results) ->
+          # Heh heh heh, sorry Chris
+          models.Payment.find()
+            .where(status: ['failed', 'cancelled'], include: true)
+            .all (err, payments) ->
+              uninclude = (payment, next) ->
+                payment.include = false
+                payment.save (err) ->
+                  next err, payment
+              async.mapSeries payments, uninclude, done
+        ]
+
       , (err, results) ->
         if err
           console.error err.stack
