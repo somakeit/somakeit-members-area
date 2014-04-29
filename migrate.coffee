@@ -108,6 +108,12 @@ MembersArea.start ->
         async.series tasks, next
 
       async.auto
+        clearSettings: (done) ->
+          models.Setting.clear done
+        settings: ['clearSettings', (done) ->
+          settings = require './vanilla-settings.json'
+          models.Setting.create settings, done
+        ]
         oldUsers: (done) ->
           q "SELECT * FROM Users ORDER BY id;", done
         friend: (done) ->
