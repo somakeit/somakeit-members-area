@@ -155,57 +155,61 @@ MembersArea.start ->
           role = new models.Role
             name: "Supporter"
           role.id = supporterRoleId
-          role.setMeta requirements: [
-            {
-              id: "role-1"
-              type: 'role'
-              roleId: friendRoleId
-            }
-            {
-              id: "text-1"
-              type: 'text'
-              text: 'A payment has been made'
-            }
-            {
-              id: "1"
-              type: 'approval'
-              roleId: trusteeRoleId
-              count: 1
-            }
-          ]
+          role.setMeta
+            requirements: [
+              {
+                id: "role-1"
+                type: 'role'
+                roleId: friendRoleId
+              }
+              {
+                id: "text-1"
+                type: 'text'
+                text: 'A payment has been made'
+              }
+              {
+                id: "1"
+                type: 'approval'
+                roleId: trusteeRoleId
+                count: 1
+              }
+            ]
+            subscriptionRequired: true
           role.save done
         member: (done) ->
           role = new models.Role
             name: "Member"
           role.id = memberRoleId
-          role.setMeta requirements: [
-            {
-              id: "role-1"
-              type: 'role'
-              roleId: friendRoleId
-            }
-            {
-              id: "role-2"
-              type: 'role'
-              roleId: supporterRoleId
-            }
-            {
-              id: "1"
-              type: 'approval'
-              roleId: trusteeRoleId
-              count: 3
-            }
-            {
-              id: "text-1"
-              type: 'text'
-              text: "Legal name proved to a trustee"
-            }
-            {
-              id: "text-2"
-              type: 'text'
-              text: "Home address proved to a trustee"
-            }
-          ]
+          role.setMeta
+            requirements: [
+              {
+                id: "role-1"
+                type: 'role'
+                roleId: friendRoleId
+              }
+              {
+                id: "role-2"
+                type: 'role'
+                roleId: supporterRoleId
+              }
+              {
+                id: "1"
+                type: 'approval'
+                roleId: trusteeRoleId
+                count: 3
+              }
+              {
+                id: "text-1"
+                type: 'text'
+                text: "Legal name proved to a trustee"
+              }
+              {
+                id: "text-2"
+                type: 'text'
+                text: "Home address proved to a trustee"
+              }
+            ]
+            subscriptionRequired: true
           role.save done
         roles: ['friend', 'trustee', 'supporter', 'member', (done) -> done()]
         newUsers: ['oldUsers', 'roles', (done, {oldUsers}) ->
