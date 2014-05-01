@@ -143,7 +143,7 @@ MembersArea.start ->
               {
                 id: "text-1"
                 type: 'text'
-                text: "voted in by the membership"
+                text: "Voted in by the membership"
                 roleId: trusteeRoleId
               }
               {
