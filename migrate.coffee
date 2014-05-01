@@ -169,6 +169,7 @@ MembersArea.start ->
                 id: "text-1"
                 type: 'text'
                 text: 'A payment has been made'
+                roleId: trusteeRoleId
               }
               {
                 id: "1"
@@ -205,11 +206,13 @@ MembersArea.start ->
                 id: "text-1"
                 type: 'text'
                 text: "Legal name proved to a trustee"
+                roleId: trusteeRoleId
               }
               {
                 id: "text-2"
                 type: 'text'
                 text: "Home address proved to a trustee"
+                roleId: trusteeRoleId
               }
             ]
             subscriptionRequired: true
