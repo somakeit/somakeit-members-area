@@ -51,11 +51,14 @@ MembersArea.start ->
             approved: oldUser.approved
           roleUser.save done
         makeFriend = (done) ->
-          roleUser = new models.RoleUser
-            user_id: newUser.id
-            role_id: friendRoleId
-            approved: oldUser.approved
-          roleUser.save done
+          newUser.verified = oldUser.approved
+          newUser.save (err) ->
+            return done err if err
+            roleUser = new models.RoleUser
+              user_id: newUser.id
+              role_id: friendRoleId
+              approved: oldUser.approved
+            roleUser.save done
         makeMember = (done) ->
           roleUser = new models.RoleUser
             user_id: newUser.id
