@@ -17,6 +17,11 @@ MembersArea.start ->
   orm.connect process.env.DATABASE_URL, (err, db) =>
     require('members-area/app/models') MembersArea, db, (err, models) ->
       q = db.driver.execQuery.bind(db.driver)
+      q = (args..., cb) ->
+        db.driver.execQuery args..., (err, result) ->
+          if result and result.length and Array.isArray(result[result.length-1])
+            result = result[result.length-1]
+          cb err, result
 
       addUser = (oldUser, next) ->
         try
