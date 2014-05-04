@@ -13,14 +13,14 @@
   "dependencies": {
     "sqlite3": "~2.2.0",
     "coffee-script": ">1.6",
-    "members-area": "^0.3.1",
-    "members-area-passport": "^0.2.1",
-    "members-area-theme-somakeit": "^0.1.1",
-    "members-area-register-of-members": "^0.1.0",
-    "members-area-remote-auth": "^0.1.0",
-    "members-area-payments": "^0.2.1",
-    "members-area-gocardless": "^0.1.0",
-    "members-area-banking": "^0.2.1"
+    "members-area": "members-area/members-area",
+    "members-area-passport": "members-area/members-area-passport",
+    "members-area-theme-somakeit": "somakeit/members-area-theme-somakeit",
+    "members-area-register-of-members": "members-area/members-area-register-of-members",
+    "members-area-remote-auth": "members-area/members-area-remote-auth",
+    "members-area-payments": "members-area/members-area-payments",
+    "members-area-gocardless": "members-area/members-area-gocardless",
+    "members-area-banking": "members-area/members-area-banking"
   },
   "devDependencies": {
     "nodemon": "~1.0.17"
