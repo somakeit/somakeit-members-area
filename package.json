@@ -13,14 +13,14 @@
   "dependencies": {
     "sqlite3": "~2.2.0",
     "coffee-script": ">1.6",
-    "members-area": "members-area/members-area",
-    "members-area-passport": "members-area/members-area-passport",
-    "members-area-theme-somakeit": "somakeit/members-area-theme-somakeit",
-    "members-area-register-of-members": "members-area/members-area-register-of-members",
-    "members-area-remote-auth": "members-area/members-area-remote-auth",
-    "members-area-payments": "members-area/members-area-payments",
-    "members-area-gocardless": "members-area/members-area-gocardless",
-    "members-area-banking": "members-area/members-area-banking"
+    "members-area": "git://github.com/members-area/members-area",
+    "members-area-passport": "git://github.com/members-area/members-area-passport",
+    "members-area-theme-somakeit": "git://github.com/somakeit/members-area-theme-somakeit",
+    "members-area-register-of-members": "git://github.com/members-area/members-area-register-of-members",
+    "members-area-remote-auth": "git://github.com/members-area/members-area-remote-auth",
+    "members-area-payments": "git://github.com/members-area/members-area-payments",
+    "members-area-gocardless": "git://github.com/members-area/members-area-gocardless",
+    "members-area-banking": "git://github.com/members-area/members-area-banking"
   },
   "devDependencies": {
     "nodemon": "~1.0.17"
