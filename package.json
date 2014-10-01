@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "if [ -x ./.env ]; then . ./.env; fi; ./node_modules/.bin/coffee index.coffee"
+    "start": "if [ -x ./.env ]; then . ./.env; fi; ./node_modules/.bin/coffee --nodejs --max_old_space_size=450 index.coffee"
   },
   "author": "",
   "license": "ISC",
