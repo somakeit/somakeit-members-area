@@ -13,13 +13,6 @@
   "dependencies": {
     "coffee-script": ">1.6",
     "members-area": "git://github.com/members-area/members-area",
-    "members-area-banking": "git://github.com/members-area/members-area-banking",
-    "members-area-gocardless": "git://github.com/members-area/members-area-gocardless",
-    "members-area-passport": "git://github.com/members-area/members-area-passport",
-    "members-area-payments": "git://github.com/members-area/members-area-payments",
-    "members-area-pin-codes": "git://github.com/members-area/members-area-pin-codes",
-    "members-area-register-of-members": "git://github.com/members-area/members-area-register-of-members",
-    "members-area-remote-auth": "git://github.com/members-area/members-area-remote-auth",
     "members-area-theme-somakeit": "git://github.com/somakeit/members-area-theme-somakeit",
     "sqlite3": "^3.0.5"
   },
